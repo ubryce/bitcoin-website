@@ -8,20 +8,68 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script> 
       $(document).ready(function(){
+        $.fn.printOnTable = function(emp){
+          var content = '<tr>';
+          for(var i = emp.length - 1; i >= 0; i--){
+            content += ('<td>' + emp[i] + '</td>');
+          }
+          content += '</tr>';
+          $('#customers').append(content);
+        }
         $('#getAllButton').click(function(){
           $.ajax({
             url: 'transactions/',
             type: 'GET',
             dataType: 'json',
             success: (data) => {
-              var emp ='';
               data.sort((a,b) => b.amount_usd - a.amount_usd);
+              // # of transactions, repeats 4 times
               for(key in data){
-                
+                var emp = [];
+                var datakey = data[key];
+                for(obj in datakey){
+                  if(obj =='amount'){
+                    //console.log(datakey.amount);
+                    //$.fn.printOnTable(datakey.amount);
+                    emp.push(datakey.amount);
+                  }
+                  if(obj =='amount_usd'){
+                    //console.log(datakey.amount_usd);
+                    //$.fn.printOnTable(datakey.amount_usd);
+                    emp.push(datakey.amount_usd);
+                  }
+                  if(obj =='id'){
+                    //console.log(datakey.id);
+                    emp.push(datakey.id);
+                  }
+                  if(obj =='from'){
+                    var ob = datakey[obj];
+                    for(var j in ob){
+                      //console.log('f'+ob.owner);
+                      emp.push(ob.owner);
+                      break;
+                    }
+                  }
+                  if(obj =='to'){
+                    var ob = datakey[obj];
+                    for(var j in ob){
+                      //console.log('t'+ob.owner);
+                      emp.push(ob.owner);
+                      break;
+                    }
+                  }
+                  if(obj =='timestamp'){
+                    //console.log(datakey.timestamp);
+                    emp.push(datakey.timestamp);
+                  }
+                }
+                //prints array [id, from, to, timestamp, amount, amount_usd]
+                //console.log(emp);
+                $.fn.printOnTable(emp);
               }
               //emp += JSON.stringify(data[key].amount);
               emp += JSON.stringify(data);
-              $('#status').html(emp);
+              $('#status').html();
             }
           })
         })
@@ -58,12 +106,12 @@
     <div id='status'></div>
     <table id="customers">
       <tr>
-        <th>BTC Amount</th>
         <th>USD Amount</th>
+        <th>BTC Amount</th>
         <th>Transaction ID</th>
-        <th>From</th>
         <th>To</th>
-        <th>Time</th>
+        <th>From</th>
+        <th>UTC Time</th>
       </tr>
     </table>
   </body>
