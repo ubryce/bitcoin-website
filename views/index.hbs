@@ -8,12 +8,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script> 
       $(document).ready(function(){
-      console.log('hello');
+        $('#getAllButton').click(function(){
+          $.ajax({
+            url: 'transactions/',
+            type: 'GET',
+            dataType: 'json',
+            success: (data) => {
+              console.log(data);
+              $('#status').html(''+JSON.stringify(data));
+            }
+          })
+        })
     });
     </script>
   </head>
   <body>
     {{ message }}
     <button id='getAllButton'>Get all transactions</button>
+    <div id='status'></div>
   </body>
 </html>

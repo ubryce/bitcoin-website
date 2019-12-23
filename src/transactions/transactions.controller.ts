@@ -9,12 +9,13 @@ export class TransactionsController {
     constructor(private readonly transactionsService: TransactionsService){
 
     }
+    /*
     @Get()
     async getAll() {
         this.myHttpRoute();
         this.getAllTransactions();
     }
-    /*
+    
     @Render('transactions')
     root(result){
         return {body:String(result)};
@@ -36,8 +37,9 @@ export class TransactionsController {
         console.log(error);
     });
     }
-
+    @Get()
     async getAllTransactions() {
+        this.myHttpRoute();
         const transactions = await this.transactionsService.getTransactions();
         return transactions;
     }
