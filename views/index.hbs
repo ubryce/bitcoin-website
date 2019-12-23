@@ -27,10 +27,44 @@
         })
     });
     </script>
+    <style>
+      #customers {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+      #customers tr:hover {background-color: #ddd;}
+
+      #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4CAF50;
+        color: white;
+      }
+</style>
   </head>
   <body>
     {{ message }}
     <button id='getAllButton'>Get all transactions</button>
     <div id='status'></div>
+    <table id="customers">
+      <tr>
+        <th>BTC Amount</th>
+        <th>USD Amount</th>
+        <th>Transaction ID</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Time</th>
+      </tr>
+    </table>
   </body>
 </html>
