@@ -11,7 +11,46 @@ export class TransactionsController {
 
     @Get()
     async myHttpRoute(): Promise<any> {
-    return this.transactionsService.myHttpCall();
+    var trans = this.transactionsService.myHttpCall()
+    
+    trans.then((result)=>{
+        for(var i = 0; i < result.length; i++){
+            this.addTrans(result[i].blockchain,result[i].symbol,result[i].id,result[i].transaction_type,result[i].hash,result[i].from,result[i].to,result[i].timestamp,result[i].amount,result[i].amount_usd,result[i].transaction_count)
+        }
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+    return trans;
+    }
+
+    async addTrans(
+        transBlockchain: string,
+        transSymbol: string,
+        transId: string,
+        transType: string,
+        transHash: string,
+        transFrom: object,
+        transTo: object,
+        transTimestamp: string,
+        transAmount: number,
+        transAmountUsd: number,
+        transCount: string,
+    ){
+        const genId = await this.transactionsService.inserTransaction(
+            transBlockchain,
+            transSymbol,
+            transId,
+            transType,
+            transHash,
+            transFrom,
+            transTo,
+            transTimestamp,
+            transAmount,
+            transAmountUsd,
+            transCount,
+        );
+        return {id:genId};
     }
 
     @Post()
