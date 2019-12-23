@@ -1,4 +1,4 @@
-import { Controller, Get, Body ,Post} from '@nestjs/common';
+import { Controller, Get, Body ,Post, Render} from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import {CreateTransactionDto} from './dto/create-transaction.dto';
 
@@ -14,31 +14,21 @@ export class TransactionsController {
     var trans = this.transactionsService.myHttpCall()
     var arr = [];
     trans.then((result)=>{
-        result.sort((a,b) => a.amount_usd - b.amount_usd);
-        console.log(result);
+        result.sort((a,b) => b.amount_usd - a.amount_usd);
         for(var i = 0; i < result.length; i++){
-            //this.addTrans(result[i].blockchain,result[i].symbol,result[i].id,result[i].transaction_type,result[i].hash,result[i].from,result[i].to,result[i].timestamp,result[i].amount,result[i].amount_usd,result[i].transaction_count);
-            arr.push(result);
+            if(result[i].blockchain == 'bitcoin'){
+                //this.addTrans(result[i].blockchain,result[i].symbol,result[i].id,result[i].transaction_type,result[i].hash,result[i].from,result[i].to,result[i].timestamp,result[i].amount,result[i].amount_usd,result[i].transaction_count);
+                arr.push(result[i]);
+            }
         }
-    
-        
+        return arr;
     })
     .catch(function(error){
         console.log(error);
     });
-
     return arr;
     }
-
-    compare(a:any,b:any):any {
-        if(a.amount < b.amount){
-            return -1;
-        }
-        if(a.amount > b.amount){
-            return 1;
-        }
-        return 0;
-    }
+    
 
     async addTrans(
         transBlockchain: string,
