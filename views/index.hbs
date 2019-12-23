@@ -14,7 +14,7 @@
             content += ('<td>' + emp[i] + '</td>');
           }
           content += '</tr>';
-          $('#customers').append(content);
+          $('#transactions').append(content);
         }
         $('#getAllButton').click(function(){
           $.ajax({
@@ -76,35 +76,25 @@
     });
     </script>
     <style>
-      #customers {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
+    table{
+      border-collapse: collapse;
+      width: 100%;
       }
 
-      #customers td, #customers th {
-        border: 1px solid #ddd;
+      th, td {
         padding: 8px;
-      }
-
-      #customers tr:nth-child(even){background-color: #f2f2f2;}
-
-      #customers tr:hover {background-color: #ddd;}
-
-      #customers th {
-        padding-top: 12px;
-        padding-bottom: 12px;
         text-align: left;
-        background-color: #4CAF50;
-        color: white;
+        border-bottom: 1px solid #ddd;
       }
+
+      tr:hover {background-color:#f5f5f5;}
 </style>
   </head>
   <body>
     {{ message }}
     <button id='getAllButton'>Get all transactions</button>
     <div id='status'></div>
-    <table id="customers">
+    <table id="transactions">
       <tr>
         <th>USD Amount</th>
         <th>BTC Amount</th>
