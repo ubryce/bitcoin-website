@@ -14,8 +14,14 @@
             type: 'GET',
             dataType: 'json',
             success: (data) => {
-              console.log(data);
-              $('#status').html(''+JSON.stringify(data));
+              var emp ='';
+              data.sort((a,b) => b.amount_usd - a.amount_usd);
+              for(key in data){
+                
+              }
+              //emp += JSON.stringify(data[key].amount);
+              emp += JSON.stringify(data);
+              $('#status').html(emp);
             }
           })
         })
