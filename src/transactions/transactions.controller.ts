@@ -12,16 +12,32 @@ export class TransactionsController {
     @Get()
     async myHttpRoute(): Promise<any> {
     var trans = this.transactionsService.myHttpCall()
-    
+    var arr = [];
     trans.then((result)=>{
+        result.sort((a,b) => a.amount_usd - b.amount_usd);
+        console.log(result);
         for(var i = 0; i < result.length; i++){
-            this.addTrans(result[i].blockchain,result[i].symbol,result[i].id,result[i].transaction_type,result[i].hash,result[i].from,result[i].to,result[i].timestamp,result[i].amount,result[i].amount_usd,result[i].transaction_count)
+            //this.addTrans(result[i].blockchain,result[i].symbol,result[i].id,result[i].transaction_type,result[i].hash,result[i].from,result[i].to,result[i].timestamp,result[i].amount,result[i].amount_usd,result[i].transaction_count);
+            arr.push(result);
         }
+    
+        
     })
     .catch(function(error){
         console.log(error);
     });
-    return trans;
+
+    return arr;
+    }
+
+    compare(a:any,b:any):any {
+        if(a.amount < b.amount){
+            return -1;
+        }
+        if(a.amount > b.amount){
+            return 1;
+        }
+        return 0;
     }
 
     async addTrans(
