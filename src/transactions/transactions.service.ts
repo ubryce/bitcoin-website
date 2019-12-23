@@ -19,6 +19,11 @@ export class TransactionsService {
 
     constructor(@InjectModel('Transaction') private readonly transactionModel: Model<Transaction>){}
     
+    async getTransactions(){
+        const transactions = await this.transactionModel.find().exec();
+        return transactions as Transaction[];
+    }
+    
     async inserTransaction(blockchain: string,
         symbol: string,
         id: string,

@@ -1,6 +1,7 @@
 import { Controller, Get, Body ,Post, Render} from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import {CreateTransactionDto} from './dto/create-transaction.dto';
+import { Request, Response } from "express";
 
 @Controller('transactions')
 export class TransactionsController {
@@ -8,25 +9,37 @@ export class TransactionsController {
     constructor(private readonly transactionsService: TransactionsService){
 
     }
-
     @Get()
+    async getAll() {
+        this.myHttpRoute();
+        this.getAllTransactions();
+    }
+    /*
+    @Render('transactions')
+    root(result){
+        return {body:String(result)};
+    }*/
+
+    
+
     async myHttpRoute(): Promise<any> {
     var trans = this.transactionsService.myHttpCall()
-    var arr = [];
     trans.then((result)=>{
-        result.sort((a,b) => b.amount_usd - a.amount_usd);
+        //result.sort((a,b) => b.amount_usd - a.amount_usd);
         for(var i = 0; i < result.length; i++){
             if(result[i].blockchain == 'bitcoin'){
                 //this.addTrans(result[i].blockchain,result[i].symbol,result[i].id,result[i].transaction_type,result[i].hash,result[i].from,result[i].to,result[i].timestamp,result[i].amount,result[i].amount_usd,result[i].transaction_count);
-                arr.push(result[i]);
             }
         }
-        return arr;
     })
     .catch(function(error){
         console.log(error);
     });
-    return arr;
+    }
+
+    async getAllTransactions() {
+        const transactions = await this.transactionsService.getTransactions();
+        return transactions;
     }
     
 

@@ -8,7 +8,7 @@ export class AppController {
   @Get()
   @Render('index')
   root(){
-    return {message:'hello'};
+    return {message:'This is the main page'};
   }
   //getHello(): string {
   //  return this.appService.getHello();
