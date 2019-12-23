@@ -2,21 +2,51 @@ import { Injectable, HttpService, HttpModule} from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
 import { resolve } from 'dns';
 import * as https from 'https';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
-import { Observable } from 'rxjs';
-import { response } from 'express';
+import { Transaction } from './transactions.model';
 
 @Injectable()
 export class TransactionsService {
-
+    
+    private transactions: Transaction[] = [];
 
     // using axios
     private axios: AxiosInstance;
     // using Http package
     private https;
 
-
+    constructor(@InjectModel('Transaction') private readonly transactionModel: Model<Transaction>){}
     
+    async inserTransaction(blockchain: string,
+        symbol: string,
+        id: string,
+        transaction_type: string,
+        hash: string,
+        from: object,
+        to: object,
+        timestamp: string,
+        amount: number,
+        amount_usd: number,
+        transaction_count: string){
+            const transId = id;
+            const newTransaction = new this.transactionModel({blockchain,
+                symbol,
+                id,
+                transaction_type,
+                hash,
+                from,
+                to,
+                timestamp,
+                amount,
+                amount_usd,
+                transaction_count});
+            const result = await newTransaction.save();
+            console.log(result);
+            return transId;
+        }
+
     myHttpCall(): Promise<any> {
         // create a new promise because the http package is based on callbacks. Resolve or reject depending on if there is an error or not
         return new Promise((resolve, reject) => {
@@ -27,8 +57,10 @@ export class TransactionsService {
             });
 
             resp.on('end', () => {
-            data = JSON.parse(data).transactions;
-            resolve(data);
+            var deta = {};
+            deta = JSON.parse(data).transactions;
+            
+            resolve(deta);
             });
         })
         .on('error', (err) => {

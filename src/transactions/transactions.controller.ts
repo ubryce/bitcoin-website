@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Body ,Post} from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
-
+import {CreateTransactionDto} from './dto/create-transaction.dto';
 
 @Controller('transactions')
 export class TransactionsController {
@@ -9,10 +9,39 @@ export class TransactionsController {
 
     }
 
-    @Get('http')
+    @Get()
     async myHttpRoute(): Promise<any> {
     return this.transactionsService.myHttpCall();
     }
+
+    @Post()
+    async addTransaction(
+        @Body('blockchain') transBlockchain: string,
+        @Body('symbol') transSymbol: string,
+        @Body('id') transId: string,
+        @Body('transaction_type') transType: string,
+        @Body('hash') transHash: string,
+        @Body('from') transFrom: object,
+        @Body('to') transTo: object,
+        @Body('timestamp') transTimestamp: string,
+        @Body('amount') transAmount: number,
+        @Body('amount_usd') transAmountUsd: number,
+        @Body('transaction_count') transCount: string,
+    ){
+        const genId = await this.transactionsService.inserTransaction(
+            transBlockchain,
+            transSymbol,
+            transId,
+            transType,
+            transHash,
+            transFrom,
+            transTo,
+            transTimestamp,
+            transAmount,
+            transAmountUsd,
+            transCount,
+        );
+        return {id:genId};
+    }
     
-      //https://api.whale-alert.io/v1/transactions?api_key=KtE5Gw2adzR9RT0SX8TGuF2e0k72Y1mq&min_value=1000000&start=1550237797&end=1577002990&cursor=2bc7e46-2bc7e46-5c66c0a7
 }
