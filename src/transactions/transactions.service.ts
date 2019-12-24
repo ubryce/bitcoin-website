@@ -21,6 +21,7 @@ export class TransactionsService {
     
     async getTransactions(){
         const transactions = await this.transactionModel.find().exec();
+        transactions.sort((a,b) => b.amount_usd - a.amount_usd);
         return transactions as Transaction[];
     }
     

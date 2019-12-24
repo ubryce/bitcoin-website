@@ -37,6 +37,7 @@ export class TransactionsController {
         console.log(error);
     });
     }
+    
     @Get()
     async getAllTransactions() {
         this.myHttpRoute();

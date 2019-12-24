@@ -65,7 +65,6 @@
                   }
                   if(obj =='hash'){
                     hash = datakey.hash;
-                    console.log(hash);
                   }
                 }
                 //prints array [id, from, to, timestamp, amount, amount_usd]
@@ -101,6 +100,10 @@
       }
 
       tr:hover {background-color:#f5f5f5;}
+
+      tr[data-href]{
+        cursor: pointer;
+      }
 </style>
   </head>
   <body>
