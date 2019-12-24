@@ -47,5 +47,14 @@ $ npm run start:dev
 $ npm run start:prod
 
 2.
+To look at the website go to 
+
+http://localhost:4000/
+
+
+3.
+To look at the outputted transactions in a JSON format go to
+
+http://localhost:4000/transactions
 ```
 
