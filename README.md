@@ -1,42 +1,42 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Bitcoin Transaction Website
+ A website that displays all transactions above $1 000 000 USD that are made on the blockchain and also stores it into a mongoDB. Once saved, we create an endpoint API to '/transactions' which displays all transactions sorted (highest to lowest) by transaction cost from the database in a JSON format, while also able to GET all transactions and display it on our site using Jquery. Once displayed we are able to click on any of the transactions to then take us to www.Blockchain.com where it shows that exact transaction. This website uses Node.js and Nest.js. 
+ 
+## API
+ This website uses two API's, one for the Blockchain from Whale Alert and the other for the Database from MongoDB, to find the transactions that are larger than $1 million USD and get all the details on that transaction, then save it into a database. 
+ 
+###### API's
+1. Whale Alert: https://docs.whale-alert.io/?_ga=2.164120636.2088609985.1573353112-1189581535.1573353112#introduction
+2. MongoDB: https://www.mongodb.com/
 
-[travis-image]: https://api.travis-ci.org/nestjs/nest.svg?branch=master
-[travis-url]: https://travis-ci.org/nestjs/nest
-[linux-image]: https://img.shields.io/travis/nestjs/nest/master.svg?label=linux
-[linux-url]: https://travis-ci.org/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="blank">Node.js</a> framework for building efficient and scalable server-side applications, heavily inspired by <a href="https://angular.io" target="blank">Angular</a>.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore"><img src="https://img.shields.io/npm/dm/@nestjs/core.svg" alt="NPM Downloads" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://api.travis-ci.org/nestjs/nest.svg?branch=master" alt="Travis" /></a>
-<a href="https://travis-ci.org/nestjs/nest"><img src="https://img.shields.io/travis/nestjs/nest/master.svg?label=linux" alt="Linux" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#5" alt="Coverage" /></a>
-<a href="https://gitter.im/nestjs/nestjs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge"><img src="https://badges.gitter.im/nestjs/nestjs.svg" alt="Gitter" /></a>
-<a href="https://opencollective.com/nest#backer"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec"><img src="https://img.shields.io/badge/Donate-PayPal-dc3d53.svg"/></a>
-  <a href="https://twitter.com/nestframework"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## What I learned
+* What REST is and how to integrate it into my application by GET, POST, DELETE ...
+* What Node.js and Nest.js is and how to use them creating a full website that uses and creates API's
+* How to setup a mongoDB in Node and be able to properly use it by adding or deleting from my server
+* How to use Jquery in browser to take in a JSON format and display things into a table on my website
 
-## Description
+## Some Bugs
+* If the database is empty and you click on the button it will get all transactions but it will not display it on the table until you refresh. Can fix this by having it wait before it calls next function to display.
+* Since the Whale Alert Api takes in a start time and an end time everytime we refresh and click the button it will add all transactions within that time frame even though it might already be in our database so we will have duplicates. Can fix this by comparing the hash of each transaction pulled from Whale Alert with our database's transaction by querying for that exact hash since hash will always be unique. Then if we can find that hash in our database, don't add.
+* Just a visual bug. When there is hundreds of transactions in our database it takes awhile to actually load the data and display it from all of the looping. Can fix this by setting a max number of transactions and have as many pages as needed or a faster way to go through JSON. 
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Tasks given
+1. Display bitcoin transactions sorted (highest to lowest) by transaction cost in BTC and USD on a webpage
+  * For task all you have to do is click the button on the middle of the screen it will display all transactions in a table format. This task took me ~3 hours because I had to learn how to actually take in data from the server and display it on the website.
+2. Cache all transactions that you grab through the Whale API in a SQLite/MongoDB database
+  * For this task I used MongoDB. The organization for my database is "BRYCE'S ORG - 2019-12-23" and is named "Project 0". This task took me ~5 hours because I had never worked with Node or Mongo and setting up MongoDB in Node was a challenge. But once I got everything setup I understood how to use it and create functions to query from the database. 
+3. Create an endpoint that outputs the cached transaction data, in JSON format, sorted (highest to lowest) by transaction cost. 
+  * For this task you have to add "/transactions" to the end of the base url and that will get you all transactions from the database sorted from highest to lowest in a JSON format. This task took me ~1 hour as once I had setup my database I was able to just get all transactions from the database and then sort it and output it in a JSON format. 
+4. Output your main webpage with nice styles. we encourage you to use a CSS framework like Bootstrap or Material. 
+  * Wanted to make a simple website with some transitions and effects and wanted simple colors. This task took me ~6 hours as I was playing around with the colors and transitions and effects on screen. 
+5. Link the bitcoin addresses to a third party bitcoin address history site on your webpage
+  * Can click on any of the rows and that will take you to that exact transaction on the blockchain website. This task took me ~10 minutes to figure out. 
 
-## Installation
-
-```bash
-$ npm install
-```
+* Learning Node js and Nest js and what they did in a full website took me awhile to learn and pick up on the typescript but once I had learned it and understood the basics I went through these tasks a lot faster. So thank you for giving me extra time. 
 
 ## Running the app
 
 ```bash
+1.
 # development
 $ npm run start
 
@@ -45,31 +45,16 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+2.
+To look at the website go to 
+
+http://localhost:4000/
+
+
+3.
+To look at the outputted transactions in a JSON format go to
+
+http://localhost:4000/transactions
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-  Nest is [MIT licensed](LICENSE).
