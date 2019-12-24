@@ -1,5 +1,7 @@
 # Bitcoin Transaction Website
- A website that displays all transactions above $1 000 000 USD that are made on the blockchain and also stores it into a mongoDB. Once saved, we create an endpoint API to '/transactions' which displays all transactions sorted (highest to lowest) by transaction cost from the database in a JSON format, while also able to GET all transactions and display it on our site using Jquery. Once displayed we are able to click on any of the transactions to then take us to www.Blockchain.com where it shows that exact transaction. This website uses Node.js and Nest.js. 
+ A website that displays all transactions above $1 000 000 USD that are made on the blockchain and also stores it into a mongoDB. Once saved, we create an endpoint API to '/transactions' which displays all transactions sorted (highest to lowest) by transaction cost from the database in a JSON format, while also able to GET all transactions and display it on our site using Jquery. Once displayed we are able to click on any of the transactions to then take us to www.Blockchain.com where it shows that exact transaction. 
+ 
+ This application uses Node.js and Nest.js. 
  
 ## API
  This website uses two API's, one for the Blockchain from Whale Alert and the other for the Database from MongoDB, to find the transactions that are larger than $1 million USD and get all the details on that transaction, then save it into a database. 
