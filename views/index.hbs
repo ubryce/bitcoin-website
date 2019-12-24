@@ -8,8 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script> 
       $(document).ready(function(){
-        $.fn.printOnTable = function(emp){
-          var content = '<tr>';
+        $.fn.printOnTable = function(emp, hash){
+          var content = '<tr data-href="https://www.blockchain.com/btc/tx/'+hash+'">';
           for(var i = emp.length - 1; i >= 0; i--){
             content += ('<td>' + emp[i] + '</td>');
           }
@@ -26,6 +26,7 @@
               // # of transactions, repeats 4 times
               for(key in data){
                 var emp = [];
+                var hash = '';
                 var datakey = data[key];
                 for(obj in datakey){
                   if(obj =='amount'){
@@ -62,10 +63,14 @@
                     //console.log(datakey.timestamp);
                     emp.push(datakey.timestamp);
                   }
+                  if(obj =='hash'){
+                    hash = datakey.hash;
+                    console.log(hash);
+                  }
                 }
                 //prints array [id, from, to, timestamp, amount, amount_usd]
                 //console.log(emp);
-                $.fn.printOnTable(emp);
+                $.fn.printOnTable(emp, hash);
               }
               //emp += JSON.stringify(data[key].amount);
               emp += JSON.stringify(data);
