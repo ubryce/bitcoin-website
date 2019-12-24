@@ -9,17 +9,6 @@ export class TransactionsController {
     constructor(private readonly transactionsService: TransactionsService){
 
     }
-    /*
-    @Get()
-    async getAll() {
-        this.myHttpRoute();
-        this.getAllTransactions();
-    }
-    
-    @Render('transactions')
-    root(result){
-        return {body:String(result)};
-    }*/
 
     
 
@@ -29,7 +18,7 @@ export class TransactionsController {
         //result.sort((a,b) => b.amount_usd - a.amount_usd);
         for(var i = 0; i < result.length; i++){
             if(result[i].blockchain == 'bitcoin'){
-                //this.addTrans(result[i].blockchain,result[i].symbol,result[i].id,result[i].transaction_type,result[i].hash,result[i].from,result[i].to,result[i].timestamp,result[i].amount,result[i].amount_usd,result[i].transaction_count);
+                this.addTrans(result[i].blockchain,result[i].symbol,result[i].id,result[i].transaction_type,result[i].hash,result[i].from,result[i].to,result[i].timestamp,result[i].amount,result[i].amount_usd,result[i].transaction_count);
             }
         }
     })

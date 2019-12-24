@@ -19,12 +19,14 @@ export class TransactionsService {
 
     constructor(@InjectModel('Transaction') private readonly transactionModel: Model<Transaction>){}
     
+    //gets all transactions from database
     async getTransactions(){
         const transactions = await this.transactionModel.find().exec();
         transactions.sort((a,b) => b.amount_usd - a.amount_usd);
         return transactions as Transaction[];
     }
     
+    //inserts transaction into database
     async inserTransaction(blockchain: string,
         symbol: string,
         id: string,
@@ -50,11 +52,13 @@ export class TransactionsService {
             const result = await newTransaction.save();
             return result.id as string;
         }
-
+    
+    // gets data from whale alert
     myHttpCall(): Promise<any> {
         // create a new promise because the http package is based on callbacks. Resolve or reject depending on if there is an error or not
         return new Promise((resolve, reject) => {
-        https.get('https://api.whale-alert.io/v1/transactions?api_key=KtE5Gw2adzR9RT0SX8TGuF2e0k72Y1mq&min_value=500000&start=1577048460&end=1577074460&cursor=2bc7e46-2bc7e46-5c66c0a7', (resp) => {
+        var ends = Math.round((new Date()).getTime() / 1000);
+        https.get('https://api.whale-alert.io/v1/transactions?api_key=KtE5Gw2adzR9RT0SX8TGuF2e0k72Y1mq&min_value=1000000&start=1577048460&end=1577074460&cursor=2bc7e46-2bc7e46-5c66c0a7', (resp) => {
             let data  = '';
             resp.on('data', (chunk) => {
             data += chunk;
