@@ -53,7 +53,7 @@ export class TransactionsService {
             return result.id as string;
         }
     
-    // gets data from whale alert
+    // gets data from whale alert and put it into a promise
     myHttpCall(): Promise<any> {
         // create a new promise because the http package is based on callbacks. Resolve or reject depending on if there is an error or not
         return new Promise((resolve, reject) => {

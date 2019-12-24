@@ -10,12 +10,11 @@ export class TransactionsController {
 
     }
 
-    
-
+    // this just calls the function and then with that promise we
+    // add everything in that JSON into our database
     async myHttpRoute(): Promise<any> {
     var trans = this.transactionsService.myHttpCall()
     trans.then((result)=>{
-        //result.sort((a,b) => b.amount_usd - a.amount_usd);
         for(var i = 0; i < result.length; i++){
             if(result[i].blockchain == 'bitcoin'){
                 this.addTrans(result[i].blockchain,result[i].symbol,result[i].id,result[i].transaction_type,result[i].hash,result[i].from,result[i].to,result[i].timestamp,result[i].amount,result[i].amount_usd,result[i].transaction_count);
@@ -27,6 +26,9 @@ export class TransactionsController {
     });
     }
     
+    //when we /transactions it will get transactions from api
+    //then get transactions from database
+    //and return the JSON of all transactions 
     @Get()
     async getAllTransactions() {
         this.myHttpRoute();
@@ -34,7 +36,7 @@ export class TransactionsController {
         return transactions;
     }
     
-
+    //just able to add transactions
     async addTrans(
         transBlockchain: string,
         transSymbol: string,
@@ -64,6 +66,7 @@ export class TransactionsController {
         return {id:genId};
     }
 
+    //being able to add into the database by post
     @Post()
     async addTransaction(
         @Body('blockchain') transBlockchain: string,
