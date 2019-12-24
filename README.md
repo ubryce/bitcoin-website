@@ -17,9 +17,14 @@
 ## Running the app
 
 ```bash
-1.
+1. Download zip off github
+
+2. Download 'node_modules' from here: https://drive.google.com/drive/u/1/folders/0ADRErA12WL8pUk9PVA
+Install folder and put it into 'bitcoin-website' folder with the other folders like 'test', 'src', 'dist', and 'views' so should have a total of 5 folders after putting in the node_modules folder
+
+3. Open a terminal and type 'npm run start'
 # development
-$ npm run start
+$ npm run start 
 
 # watch mode
 $ npm run start:dev
@@ -27,13 +32,13 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 
-2.
+4.
 To look at the website go to 
 
 http://localhost:4000/
 
 
-3.
+5.
 To look at the outputted transactions in a JSON format go to
 
 http://localhost:4000/transactions
