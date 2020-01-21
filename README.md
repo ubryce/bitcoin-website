@@ -62,5 +62,5 @@ http://localhost:4000/transactions
 5. Link the bitcoin addresses to a third party bitcoin address history site on your webpage
   * Can click on any of the rows and that will take you to that exact transaction on the blockchain website. This task took me ~10 minutes to figure out. 
 
-* Learning Node js and Nest js and what they did in a full website took me awhile to learn and pick up on the typescript but once I had learned it and understood the basics I went through these tasks a lot faster. So thank you for giving me extra time. 
+* Learning Node js and Nest js and what they did in a full website took me awhile to learn and pick up on the typescript but once I had learned it and understood the basics I went through these tasks a lot faster. 
 
