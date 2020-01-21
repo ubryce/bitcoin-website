@@ -57,8 +57,11 @@ export class TransactionsService {
     myHttpCall(): Promise<any> {
         // create a new promise because the http package is based on callbacks. Resolve or reject depending on if there is an error or not
         return new Promise((resolve, reject) => {
-        var ends = Math.round((new Date()).getTime() / 1000);
-        https.get('https://api.whale-alert.io/v1/transactions?api_key=KtE5Gw2adzR9RT0SX8TGuF2e0k72Y1mq&min_value=500000&start=1577048460&end=1577074460&cursor=2bc7e46-2bc7e46-5c66c0a7', (resp) => {
+        const ends = Math.round((new Date()).getTime() / 1000);
+        const starts = ends - 30000;
+        const end = starts + 7600
+        console.log(ends);
+        https.get(`https://api.whale-alert.io/v1/transactions?api_key=KtE5Gw2adzR9RT0SX8TGuF2e0k72Y1mq&min_value=500000&start=${String(starts)}&end=${String(end)}&cursor=2bc7e46-2bc7e46-5c66c0a7`, (resp) => {
             let data  = '';
             resp.on('data', (chunk) => {
             data += chunk;
