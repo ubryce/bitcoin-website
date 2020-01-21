@@ -21,10 +21,9 @@
 ```bash
 1. Download zip off github
 
-2. Download 'node_modules' from here: https://drive.google.com/drive/u/1/folders/0ADRErA12WL8pUk9PVA
-Install folder and put it into 'bitcoin-website' folder with the other folders like 'test', 'src', 'dist', and 'views' so should have a total of 5 folders after putting in the node_modules folder
+2. Open the terminal and download node_modules by typing "npm install"
 
-3. Open a terminal and type 'npm run start'
+3. Run the program by typing "npm run start"
 # development
 $ npm run start 
 
